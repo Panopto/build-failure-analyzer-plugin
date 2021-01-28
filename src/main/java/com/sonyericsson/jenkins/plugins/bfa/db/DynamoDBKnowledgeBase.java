@@ -479,7 +479,9 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
          * @param value the pattern to check.
          * @return {@link hudson.util.FormValidation#ok()} if everything is well.
          */
+        @RequirePOST
         public FormValidation doCheckCredentialsPath(@QueryParameter("value") final String value) {
+            Jenkins.getActiveInstance().checkPermission(Jenkins.ADMINISTER);
             File f = new File(value);
             if(!f.exists()) {
                 return FormValidation.error("Credential file does not exist!");
@@ -513,11 +515,13 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
          * @return {@link FormValidation#ok() } if can be done,
          *         {@link FormValidation#error(java.lang.String) } otherwise.
          */
+        @RequirePOST
         public FormValidation doTestConnection(
                 @QueryParameter("region") final String region,
                 @QueryParameter("credentialsPath") final String credentialsPath,
                 @QueryParameter("credentialProfile") final String credentialProfile
                 ) {
+            Jenkins.getActiveInstance().checkPermission(Jenkins.ADMINISTER);
             DynamoDBKnowledgeBase base = new DynamoDBKnowledgeBase(region, credentialsPath, credentialProfile);
             try {
                 base.getDynamoDb();

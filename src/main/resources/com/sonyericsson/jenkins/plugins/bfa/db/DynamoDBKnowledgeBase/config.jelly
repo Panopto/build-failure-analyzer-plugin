@@ -27,12 +27,12 @@
     <f:select default="${descriptor.getDefaultRegion()}" />
   </f:entry>
   <f:entry title="${%Credentials Filepath}" field="credentialsPath">
-    <f:textbox default="${descriptor.getDefaultCredentialsPath()}"
+    <f:textbox default="${descriptor.getDefaultCredentialsPath()}" checkMethod="post"
         checkUrl="'${rootURL}/plugin/build-failure-analyzer/knowledgeBaseDescriptor/DynamoDBKnowledgeBaseDescriptor/checkCredentialsPath?value='+escape(this.value)"/>
   </f:entry>
   <f:entry title="${%Credential Profile}" field="credentialProfile">
     <f:textbox default="${descriptor.getDefaultCredentialProfile()}"
         checkUrl="'${rootURL}/plugin/build-failure-analyzer/knowledgeBaseDescriptor/DynamoDBKnowledgeBaseDescriptor/checkCredentialsProfile?value='+escape(this.value)"/>
   </f:entry>
-  <f:validateButton title="Test Connection" progress="Testing..." method="testConnection" with="region,credentialsPath,credentialProfile"/>
+  <f:validateButton title="Test Connection" checkMethod="post" progress="Testing..." method="testConnection" with="region,credentialsPath,credentialProfile"/>
 </j:jelly>
