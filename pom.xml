@@ -328,7 +328,14 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
-            <version>1.11.106</version>
+            <version>1.11.854</version>
+            <exclusions>
+                <exclusion>
+                    <!-- Provided by the plugin -->
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <build>

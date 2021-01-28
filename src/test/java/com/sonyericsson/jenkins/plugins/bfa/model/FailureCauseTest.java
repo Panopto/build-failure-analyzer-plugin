@@ -475,7 +475,7 @@ public class FailureCauseTest {
      * Test two {@link FailureCause} instances are not equal.
      */
     @Test
-    public void testNotEquals(){
+    public void testNotEquals() {
         Date d = new Date();
         Indication i = new BuildLogIndication("something");
         FailureCause cause1 = getCauseForEquality("foo1", d, Collections.singletonList(i));

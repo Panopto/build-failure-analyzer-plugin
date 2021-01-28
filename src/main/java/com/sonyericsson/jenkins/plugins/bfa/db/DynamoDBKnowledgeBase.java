@@ -24,6 +24,7 @@ import jenkins.model.Jenkins;
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.interceptor.RequirePOST;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,6 +32,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -45,9 +47,9 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
     private static final String DYNAMODB_DEFAULT_CREDENTIALS_PATH =
             System.getProperty("user.home") + "/.aws/credentials";
     private static final String DYNAMODB_DEFAULT_CREDENTIAL_PROFILE = "default";
-    static final Map<String, Condition> NOT_REMOVED_FILTER_EXPRESSION = new HashMap<String, Condition>(){{
+    static final Map<String, Condition> NOT_REMOVED_FILTER_EXPRESSION = new HashMap<String, Condition>() { {
         put("_removed", new Condition().withComparisonOperator("NULL"));
-    }};
+    } };
 
     private static AmazonDynamoDB dynamoDB;
     private transient DynamoDBMapper dbMapper;
@@ -326,7 +328,7 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
      */
     // TODO: 4/19/18 Implement this
     @Override
-    public boolean isStatisticsEnabled() {
+    public boolean isEnableStatistics() {
         return false;
     }
 
@@ -338,7 +340,7 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
      */
     // TODO: 4/19/18 Implement this
     @Override
-    public boolean isSuccessfulLoggingEnabled() {
+    public boolean isSuccessfulLogging() {
         return false;
     }
 
@@ -481,9 +483,9 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
          */
         @RequirePOST
         public FormValidation doCheckCredentialsPath(@QueryParameter("value") final String value) {
-            Jenkins.getActiveInstance().checkPermission(Jenkins.ADMINISTER);
+            Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
             File f = new File(value);
-            if(!f.exists()) {
+            if (!f.exists()) {
                 return FormValidation.error("Credential file does not exist!");
             }
 

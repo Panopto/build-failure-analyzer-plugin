@@ -99,7 +99,7 @@ public class DynamoDBKnowledgeBaseTest {
      * @throws Exception if so.
      */
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         // Mock interactions with Jenkins
         Authentication mockAuth = mock(Authentication.class);
         PowerMockito.mockStatic(Jenkins.class);
@@ -124,7 +124,7 @@ public class DynamoDBKnowledgeBaseTest {
      * @return FailureCause
      * @throws Exception if so.
      */
-    public FailureCause createFailureCause(String id) throws Exception{
+    public FailureCause createFailureCause(String id) throws Exception {
         return new FailureCause(id, "myFailureCause", "description", "comment", new Date(),
                 "category", indications, null);
     }
@@ -320,7 +320,7 @@ public class DynamoDBKnowledgeBaseTest {
             causes.add(cause);
         }
 
-        doReturn(causes).when(localKb).getCauseNames();
+        doReturn(causes).when(localKb).getCauses();
         doReturn(createFailureCause("foo")).when(kb).saveCause(Matchers.any(FailureCause.class));
         kb.convertFrom(localKb);
         Mockito.verify(kb, Mockito.times(MAX_ITERATIONS)).saveCause(Matchers.any(FailureCause.class));

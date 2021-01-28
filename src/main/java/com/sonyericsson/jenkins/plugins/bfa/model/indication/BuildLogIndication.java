@@ -255,7 +255,7 @@ public class BuildLogIndication extends Indication {
                 @QueryParameter("pattern") final String testPattern,
                 @QueryParameter("testText") String testText,
                 @QueryParameter("textSourceIsUrl") final boolean textSourceIsUrl) {
-            Jenkins.get().checkPermission(PluginImpl.UPDATE_PERMISSION);
+            Jenkins.getInstance().checkPermission(PluginImpl.UPDATE_PERMISSION);
             if (textSourceIsUrl) {
                 testText = testText.replaceAll("/\\./", "/").replaceAll("/view/change-requests", "");
                 Matcher urlMatcher = URL_PATTERN.matcher(testText);
