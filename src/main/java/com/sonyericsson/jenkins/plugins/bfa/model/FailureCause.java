@@ -869,7 +869,7 @@ public class FailureCause implements Serializable, Action, Describable<FailureCa
                     Map<String, String> mapped = objectMapper.readValue(stringed, typeRef);
                     stringedIndications.add(mapped);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.log(Level.SEVERE, null, e);
                 }
             }
             return stringedIndications;
@@ -891,7 +891,7 @@ public class FailureCause implements Serializable, Action, Describable<FailureCa
                     Indication indication = Indication.class.cast(obj);
                     indications.add(indication);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.log(Level.SEVERE, null, e);
                 }
             }
             return indications;
