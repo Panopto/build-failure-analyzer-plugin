@@ -218,7 +218,7 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
             convertFromAbstract(oldKnowledgeBase);
             convertRemoved((DynamoDBKnowledgeBase)oldKnowledgeBase);
         } else {
-            for (FailureCause cause : oldKnowledgeBase.getCauseNames()) {
+            for (FailureCause cause : oldKnowledgeBase.getCauses()) {
                 saveCause(cause);
             }
         }
