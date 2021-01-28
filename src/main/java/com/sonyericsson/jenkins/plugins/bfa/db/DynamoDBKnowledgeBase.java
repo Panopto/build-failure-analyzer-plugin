@@ -296,14 +296,9 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
         }
     }
 
-    /**
-     * Makes checkstyle happy.
-     * @return hashcode of class
-     */
     @Override
     public int hashCode() {
-        //Making checkstyle happy.
-        return getClass().getName().hashCode();
+        return Objects.hash(region, credentialsPath, credentialsProfile);
     }
 
     /**

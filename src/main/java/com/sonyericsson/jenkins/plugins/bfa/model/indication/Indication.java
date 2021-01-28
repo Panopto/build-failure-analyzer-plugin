@@ -107,14 +107,9 @@ public abstract class Indication implements Describable<Indication>, Serializabl
                 ((Indication)o).getUserProvidedExpression());
     }
 
-    /**
-     * Makes checkstyle happy.
-     * @return hashcode of class
-     */
     @Override
     public int hashCode() {
-        //Making checkstyle happy.
-        return getClass().getName().hashCode();
+        return pattern.hashCode();
     }
 
     /**

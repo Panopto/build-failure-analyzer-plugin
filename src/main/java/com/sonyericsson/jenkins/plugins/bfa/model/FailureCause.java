@@ -715,26 +715,13 @@ public class FailureCause implements Serializable, Action, Describable<FailureCa
         }
 
         FailureCause fc = (FailureCause)o;
-        Field[] fields = this.getClass().getDeclaredFields();
-        EqualsBuilder eb = new EqualsBuilder();
-        for (Field f:fields) {
-            try {
-                eb.append(f.get(this), f.get(fc));
-            } catch (IllegalArgumentException | IllegalAccessException e) {
-                return false;
-            }
-        }
-        return eb.isEquals();
+
+        return id == fc.id;
     }
 
-    /**
-     * Makes checkstyle happy.
-     * @return hashcode of class
-     */
     @Override
     public int hashCode() {
-        //Making checkstyle happy.
-        return getClass().getName().hashCode();
+        return id.hashCode();
     }
 
     /**
