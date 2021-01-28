@@ -21,6 +21,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import hudson.util.FormValidation;
 import hudson.util.ListBoxModel;
 import jenkins.model.Jenkins;
+import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import java.io.File;
@@ -87,7 +88,7 @@ public class DynamoDBKnowledgeBase extends KnowledgeBase {
      */
     @DataBoundConstructor
     public DynamoDBKnowledgeBase(String region, String credentialsPath, String credentialsProfile) {
-        if (region == null || region.isEmpty()) {
+        if (StringUtils.isEmpty(region)) {
             region = DYNAMODB_DEFAULT_REGION;
         }
         if (credentialsPath == null || credentialsPath.isEmpty()) {
